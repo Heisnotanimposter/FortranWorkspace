@@ -1,5 +1,5 @@
-# FotranWorkspace
- Fotran
+# fortranWorkspace
+ fortran
 Simplified LR Parser in Fortran
 This project contains the foundational code for a simplified LR(0) parser implemented in Fortran. The LR parsing method is a cornerstone of compiler design, standing for "Left-to-right, Rightmost derivation" parsing. It is instrumental in understanding how compilers interpret and process programming languages. Our implementation is a basic illustration aimed at providing a conceptual framework rather than a fully functioning parser.
 
