@@ -1,45 +1,42 @@
-# fortranWorkspace
-## Simplified LR Parser in Fortran
+# Graduate Level Algorithm Portfolio: Fortran
 
-This project contains the foundational code for a simplified LR(0) parser implemented in Fortran. The LR parsing method is a cornerstone of compiler design, standing for "Left-to-right, Rightmost derivation" parsing. It is instrumental in understanding how compilers interpret and process programming languages. Our implementation is a basic illustration aimed at providing a conceptual framework rather than a fully functioning parser.
+This project contains the foundational code for a base compiler frontend and an LR(0) parser implemented in Fortran. 
 
-### Overview
+## Overview
 
-The code sets up essential structures necessary for LR parsing, including states and symbols which are fundamental to the parsing process. This simplified version lays the groundwork for a more complex parser that could be developed to handle a specific grammar.
+The LR parsing method is a cornerstone of compiler design. While the original version only initialized placeholder states and symbols, this graduate-level enhancement introduces a functional **Lexer/Scanner Frontend**, evolving the project into a more complete representation of a "Base Compiler."
 
-### Features
+## Architecture & Features
 
-- **Parser States**: Represents various states the parser can be in during the parsing process.
-- **Grammar Symbols**: Represents terminals and non-terminals in the grammar.
-- **Error Handling**: Implements basic error reporting functionalities.
-- **Stack Operations**: Includes a stack module for managing parser symbols, crucial for managing the parser's state during execution.
-- **Symbol Table**: Adds a symbol table management module for storing and retrieving symbol information efficiently.
+The architecture is divided into clear modular stages of compilation:
 
-### Structure
+1.  **Lexical Analysis (`lexer.f90`)**:
+    *   \[NEW] A raw character scanner that processes source code strings.
+    *   Tokenizes the input securely into fundamental compiler symbols (`ID_TOKEN`, `NUM_TOKEN`, `OP_TOKEN`, `EOF_TOKEN`).
+    *   Ignores whitespace and gracefully bounds checks the source buffer.
+2.  **Syntax Analysis / Parsing (`LRParser.f90`)**:
+    *   The main entry point that drives the lexer to consume tokens.
+    *   Prepares state for the LR(0) (Left-to-right, Rightmost derivation) automaton.
+3.  **Data Structures (`handling.f90`, `managing.f90`)**:
+    *   Robust Fortran modules for `StackOperations` and `SymbolTable` management, vital for both keeping track of terminal scopes and parser state backtracking.
 
-The project is structured as follows:
+## Getting Started
 
-- **LRParser Program**: The main program that initializes the parser states and symbols, preparing the ground for parsing logic.
-- **InitializeStates Subroutine**: A subroutine dedicated to initializing parser states with dummy values.
-- **InitializeSymbols Subroutine**: A subroutine for initializing grammar symbols with example values.
-- **ErrorHandler Subroutine**: Handles errors that might occur during the parsing process.
-- **StackModule**: A module that implements stack operations necessary for managing the parsing process.
-- **SymbolTableModule**: A module that manages a symbol table, essential for complex parsing tasks.
+### Prerequisites
+*   A Fortran compiler (e.g., GNU Fortran `gfortran`)
+*   `make`
 
-### Getting Started
+### Building and Running
 
-This section will guide you through the basic steps to understand and interact with the code.
-
-#### Prerequisites
-
-To run this Fortran code, you will need:
-
-- A Fortran compiler (e.g., GNU Fortran (gfortran), Intel Fortran)
-- Basic understanding of compiler theory and LR parsing
-
-#### Running the Code
-
-- **Compile the Code**: Use your Fortran compiler to compile the source file. With gfortran, the command would be:
+The project has been restructured with a dedicated `Makefile` handling module dependencies and object compilation natively.
 
 ```bash
-gfortran -o lrparser LRParser.f90
+# To build the base compiler pipeline natively:
+make
+
+# To run the compiler simulation demonstrating the new lexer feeding into the parser:
+make run
+
+# Clean build artifacts:
+make clean
+```
