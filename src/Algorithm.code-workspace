@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "../../Algorithm"
+		},
+		{
+			"path": "../../Algorithm-with-C"
+		},
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../HelloRust"
+		}
+	]
+}
